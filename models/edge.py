@@ -17,7 +17,10 @@ class Edge:
     def getCost(self):
         requests = self.endpoint.getNumberOfRequests()
         latencyImprovement = self.endpoint.getLatencyImprovement(self.cache)
-        return requests * latencyImprovement
+
+        videoSize = self.endpoint.requests[0].getVideo().getSize()
+
+        return requests * latencyImprovement / videoSize
 
     def __gt__(self, other):
         return self.getCost() > other.getCost()

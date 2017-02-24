@@ -135,14 +135,10 @@ class App:
         self.edges = sorted(self.edges, reverse=True)
         self.logger.log("Done sorting edges")
 
-    def getNextEdge(self):
-        for edge in self.edges:
-            yield edge
-
     def solveAllEdges(self):
         self.logger.log("Solving all edges")
 
-        for i, edge in enumerate(self.getNextEdge()):
+        for i, edge in enumerate(self.edges):
 
             percentage = int(100 * i / len(self.edges))
             prevPercentage = int(100 * (i-1) / len(self.edges))
@@ -158,7 +154,7 @@ class App:
         endpoint = edge.getEndpoint()
         cache = edge.getCache()
 
-        for request in endpoint.getNextRequest():
+        for request in endpoint.requests:
             self.solveOneRequest(endpoint, cache, request)
 
     def solveOneRequest(self, endpoint, cache, request):
@@ -172,6 +168,7 @@ class App:
             video.addToCache(cache)
 
     def generateOutput(self):
+        usedCaches = []
         usedCaches = [cache for cache in self.caches.values()
                       if not cache.empty()]
 
