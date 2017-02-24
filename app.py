@@ -143,6 +143,13 @@ class App:
         self.logger.log("Solving all edges")
 
         for i, edge in enumerate(self.getNextEdge()):
+
+            percentage = int(100 * i / len(self.edges))
+            prevPercentage = int(100 * (i-1) / len(self.edges))
+
+            if percentage != prevPercentage:
+                self.logger.log("Completed %i%%" % percentage)
+
             self.solveOneEdge(edge)
 
         self.logger.log("Done solving all edges")

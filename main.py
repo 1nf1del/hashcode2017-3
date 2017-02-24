@@ -3,10 +3,14 @@ from app import App
 
 
 def main():
-    app = App("tests/me_at_the_zoo.in")
-    # app = App("videos_worth_spreading.in")
-    # app = App("trending_today.in")
-    # app = App("kittens.in")
+    inputs = [
+        "tests/me_at_the_zoo.in",
+        "tests/videos_worth_spreading.in",
+        "tests/trending_today.in",
+        "tests/kittens.in"
+    ]
+
+    app = App(inputs[2])
 
     app.sortEdges()
     app.solveAllEdges()
